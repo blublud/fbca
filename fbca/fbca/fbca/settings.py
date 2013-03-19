@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hotcomment',
+    'wwwfront',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -155,3 +156,9 @@ LOGGING = {
         },
     }
 }
+
+TEMPLATE_LOADERS = (
+    ('django.template.loaders.cached.Loader', ( 
+        'django.template.loaders.app_directories.Loader',
+    )),
+)

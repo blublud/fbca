@@ -5,7 +5,10 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^hotcomment$', 'hotcomment.views.response'),
+    url(r'^hotcomment/$', 'hotcomment.views.response'),
+    url(r'^pagelist/$','wwwfront.views.pagelist'),
+    url(r'^postlist/$','wwwfront.views.postlist'),
+    url(r'^postDetails/$','wwwfront.views.postDetails'),
     # Examples:
     # url(r'^$', 'fbca.views.home', name='home'),
     # url(r'^fbca/', include('fbca.foo.urls')),

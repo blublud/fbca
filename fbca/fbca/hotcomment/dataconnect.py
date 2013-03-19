@@ -10,7 +10,7 @@ from collections import deque
 
 class PostFetcher:
 
-    commentStore={}        
+    commentStore={}   
 
 #===============================================================================
 # comments.fields(id,from,message,message_tags,created_time,likes.fields(id))
@@ -21,7 +21,6 @@ class PostFetcher:
 #    + opt. tags: [taggedIds]
 #    + opt. likes:[likeIds]
 #===============================================================================
-    
 
     def submit(self, postId):
         
@@ -54,13 +53,3 @@ class PostFetcher:
             return self.commentStore[postId].popleft()
         else:
             return None
-
-#===============================================================================
-# p = PostFetcher()
-# p.submit('10151574324009369')
-# 
-# cmnt = p.getcomment('10151574324009369')
-# while cmnt != None:
-#    print cmnt['id']
-#    cmnt = p.getcomment('10151574324009369')
-#===============================================================================

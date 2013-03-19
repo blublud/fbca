@@ -4,6 +4,7 @@ from graph import builder
 import json
 
 def response(request):
+    
     postId= request.GET.get('postId','')
     
     b = builder()

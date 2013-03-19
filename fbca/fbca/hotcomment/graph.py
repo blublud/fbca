@@ -6,9 +6,7 @@ Created on Mar 12, 2013
 from scipy.sparse import lil_matrix
 from scipy.sparse.linalg import spsolve, eigs
 from numpy import ones
-
-import dataconnect
-
+from dataaccess.fbdata import getCommentInPost
 import logging, os
 import utils
  
@@ -44,12 +42,8 @@ class builder:
 
     def buildgraph(self, postId):
         
-        p = dataconnect.PostFetcher()
-        p.submit(postId)
-        
-        while True:
-            cmnt = p.getcomment(postId)
-            if cmnt== None: break            
+        cmnts = getCommentInPost(postId, False)        
+        for cmnt in cmnts:            
             #replace native fb comment Id by local comment index in cmntIdMap
             cmntIdx = len(self.cmntIdMap)
             if cmntIdx >= GRAPH_SIZE: break
@@ -112,6 +106,17 @@ class builder:
         hot_cmnts = self.findCentralCmnt(nCmnts)
         return hot_cmnts
     
+    def getCmntReferences(self, hotCmnts):
+        references = {}                
+        for cmnt in hotCmnts:
+            ref = []
+            idx = self.cmntIdMap.index(cmnt)
+            r = self.prg.getrow(idx)
+            for i in xrange(r.shape[1]):
+                if r[0,i] > 0: ref.append(self.cmntIdMap[i])
+            references[cmnt] = ref
+        return references
+        
     def findCentralCmnt(self, nCmnts):
         one = ones(GRAPH_SIZE)
         cmnt_count = len(self.cmntIdMap)
