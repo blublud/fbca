@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <title>{% block title %}My amazing site{% endblock %}</title>
+</head>
+
+<body>
+	
+	<div id="Post">
+		<img src="{{post.picture}}">
+		<p>{{post.message}}</p>	
+	</div>
+	
+	<div id="hotCommentList">
+		<b>Hot comments:</b>
+		{%for hotCmnt in hotCmnts%}
+			<a href="#{{hotCmnt}}">{{hotCmnt|slice:"-6:"}}, </a>
+		{%endfor%}				
+	</div>
+	
+	<p></p>
+	
+	<div id="commentList">
+		<div>
+			{%for comment in commentList%}			
+				<p>
+					<a id={{comment.id}} href="http://www.facebook.com/{{comment.from.id}}">{{comment.id|slice:"-6:"}}.{{comment.from.name}}:</a>
+					<a>{{comment.like_count}}likes</a>			
+					{%if comment.hot%}
+						<b>{{comment.message}}</b>
+						<p>
+							Referred by:
+							{%for ref in comment.ref%}
+								<a href="#{{ref}}">{{ref|slice:"-6:"}}, </a>
+							{%endfor%}
+						</p>
+					{%else%}
+						<a>{{comment.message}}</a>			
+					{%endif%}
+				</p>
+			
+			{%endfor%}
+		</div>
+	</div>
+    <div id="content">
+        {% block content %}{{key}}{% endblock %}
+    </div>
+</body>
+</html>
