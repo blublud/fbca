@@ -7,8 +7,8 @@ from wwwfront.facebook import get_app_access_token
 import urllib, json
 from collections import deque
 
-appId='151424291689079'
-appSecret='e261f25d83fa8649d4442df584824a7a'
+appId='123456'#fill in your own appId
+appSecret='123456' #fill in your own appSecret
 
 def getPostInPage(pageId):
     
